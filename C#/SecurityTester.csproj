@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>SecurityTester</AssemblyName>
+    <RootNamespace>SecurityTester</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Needed for HttpUtility.ParseQueryString in Crawler.cs -->
+    <PackageReference Include="System.Web.HttpUtility" Version="*" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,69 @@
+{
+  "name": "security-tester",
+  "displayName": "Security Tester",
+  "description": "Scan any website for 24 security vulnerabilities — SQL injection, XSS, CSRF, JWT attacks, exposed files, and more. Pinpoints exact locations and provides fix code.",
+  "version": "1.0.0",
+  "publisher": "G4Dev",
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other", "Testing"],
+  "keywords": ["security", "penetration testing", "vulnerability", "scanner", "XSS", "SQL injection"],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "securityTester.run",
+        "title": "Security Tester: Run Full Scan (with Crawler)",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "securityTester.runNoCrawl",
+        "title": "Security Tester: Run Quick Scan (Root URL Only)",
+        "icon": "$(zap)"
+      },
+      {
+        "command": "securityTester.openReport",
+        "title": "Security Tester: Open Last Report",
+        "icon": "$(notebook)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "securityTester.run",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Security Tester",
+      "properties": {
+        "securityTester.maxPages": {
+          "type": "number",
+          "default": 100,
+          "description": "Maximum number of pages to crawl per scan"
+        },
+        "securityTester.maxDepth": {
+          "type": "number",
+          "default": 4,
+          "description": "Maximum crawl depth from root URL"
+        },
+        "securityTester.timeout": {
+          "type": "number",
+          "default": 10,
+          "description": "Request timeout in seconds"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^2.22.0"
+  }
+}
