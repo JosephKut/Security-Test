@@ -51,6 +51,7 @@ public class XssTest
                     var testUrl = $"{uri.GetLeftPart(UriPartial.Path)}?{qs}";
                     var res     = await client.GetAsync(testUrl);
                     var body    = await res.Content.ReadAsStringAsync();
+                    await Task.Delay(100);
 
                     if (body.Contains(payload))
                     {

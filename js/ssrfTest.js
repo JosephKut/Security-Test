@@ -16,6 +16,8 @@ const SSRF_TARGETS = [
   { url: "http://localhost:6379/",                               label: "Local Redis",              marker: "redis" },
 ];
 
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 async function fetchURL(url, timeout = 5000) {
   return new Promise((resolve) => {
     try {
@@ -51,6 +53,7 @@ async function testSSRF(target, siteMap) {
         const testURL = `${probeBase}?${param}=${encodeURIComponent(ssrfUrl)}`;
         const res     = await fetchURL(testURL);
         if (!res || res.status === 404) continue;
+        await delay(100);
 
         const bodyLower = res.body.toLowerCase();
         const triggered = marker

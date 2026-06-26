@@ -6,6 +6,8 @@
 
 const { crawl } = require("./crawler");
 
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 // ── All 24 tests ──────────────────────────────────────────────
 const testSQLInjection        = require("./tests/sqlInjection");
 const testXSS                 = require("./tests/xssTest");
@@ -120,6 +122,8 @@ async function runScan(target, options = {}, hooks = {}) {
 
     results.push(result);
     onTestDone(result);
+
+    await delay(100);
   }
 
   return { results, siteMap };

@@ -10,6 +10,8 @@ const XSS_PAYLOADS = [
   "<body onload=alert(1)>"
 ];
 
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 async function fetchURL(url, timeout = 5000) {
   return new Promise((resolve) => {
     try {
@@ -57,6 +59,7 @@ async function testXSS(target, siteMap) {
         }
         const testURL = parsed.toString();
         const res     = await fetchURL(testURL);
+        await delay(100);
 
         if (res && res.body.includes(payload)) {
           result.passed = false;

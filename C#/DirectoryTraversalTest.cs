@@ -34,8 +34,9 @@ public class DirectoryTraversalTest
 
             try
             {
-                var response = await client.GetAsync(testUrl);
-                var body     = (await response.Content.ReadAsStringAsync()).ToLower();
+                    var response = await client.GetAsync(testUrl);
+                    var body     = (await response.Content.ReadAsStringAsync()).ToLower();
+                    await Task.Delay(100);
 
                 foreach (var (sig, file) in Signatures)
                 {

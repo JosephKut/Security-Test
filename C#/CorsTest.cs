@@ -20,8 +20,9 @@ public class CorsTest
                 request.Headers.Add("Origin", evilOrigin);
                 request.Headers.Add("Access-Control-Request-Method", "GET");
 
-                var res = await client.SendAsync(request);
-                if (!res.Headers.TryGetValues("access-control-allow-origin", out var acao)) continue;
+                    var res = await client.SendAsync(request);
+                    await Task.Delay(100);
+                    if (!res.Headers.TryGetValues("access-control-allow-origin", out var acao)) continue;
 
                 var origin = string.Join("", acao);
                 res.Headers.TryGetValues("access-control-allow-credentials", out var acac);

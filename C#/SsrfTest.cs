@@ -48,6 +48,7 @@ public class SsrfTest
                     var res    = await client.GetAsync(testUrl);
                     var body   = (await res.Content.ReadAsStringAsync()).ToLower();
                     int status = (int)res.StatusCode;
+                    await Task.Delay(100);
                     if (status == 404) continue;
 
                     bool triggered = ssrfTarget.Marker != null

@@ -30,9 +30,10 @@ public class SensitiveDataTest
         {
             try
             {
-                var res  = await client.GetAsync(page);
-                var body = await res.Content.ReadAsStringAsync();
-                if ((int)res.StatusCode == 404) continue;
+                    var res  = await client.GetAsync(page);
+                    var body = await res.Content.ReadAsStringAsync();
+                    await Task.Delay(100);
+                    if ((int)res.StatusCode == 404) continue;
 
                 foreach (var p in Patterns)
                 {

@@ -19,6 +19,8 @@ const SENSITIVE_SIGNATURES = [
   { sig: "nobody:x:",    file: "/etc/passwd" },
 ];
 
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 async function fetchURL(targetURL, timeout = 5000) {
   return new Promise((resolve) => {
     try {
@@ -50,6 +52,7 @@ async function testDirectoryTraversal(target, siteMap) {
       const testURL = `${currentBase}${path}`;
       const res     = await fetchURL(testURL);
       if (!res) continue;
+      await delay(100);
 
       const body = res.body.toLowerCase();
       for (const { sig, file } of SENSITIVE_SIGNATURES) {

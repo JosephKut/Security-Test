@@ -55,13 +55,15 @@ public class Crawler
     private readonly HttpClient _client;
     private readonly int        _maxPages;
     private readonly int        _maxDepth;
+    private readonly int        _delayMs;
     private readonly bool       _verbose;
 
-    public Crawler(HttpClient client, int maxPages = 100, int maxDepth = 4, bool verbose = true)
+    public Crawler(HttpClient client, int maxPages = 100, int maxDepth = 4, int delayMs = 100, bool verbose = true)
     {
         _client   = client;
         _maxPages = maxPages;
         _maxDepth = maxDepth;
+        _delayMs  = delayMs;
         _verbose  = verbose;
     }
 
@@ -155,6 +157,9 @@ public class Crawler
             }
 
             siteMap.Pages.Add(pageInfo);
+
+            if (_delayMs > 0 && queue.Count > 0)
+                await Task.Delay(_delayMs);
         }
 
         siteMap.Endpoints = endpoints.ToList();

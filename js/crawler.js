@@ -19,6 +19,7 @@ const IGNORED_EXTENSIONS = [
 const MAX_PAGES  = 100;  // max pages to crawl
 const MAX_DEPTH  = 4;    // max link depth from root
 const TIMEOUT    = 6000;
+const DELAY_MS   = 100;  // polite delay between requests
 
 async function fetchPage(url) {
   return new Promise((resolve) => {
@@ -204,6 +205,10 @@ async function crawl(startUrl, options = {}) {
     }
 
     pages.push(pageData);
+
+    if (DELAY_MS > 0 && queue.length > 0) {
+      await new Promise(r => setTimeout(r, DELAY_MS));
+    }
   }
 
   if (verbose) {

@@ -2,12 +2,14 @@ const https = require("https");
 const http  = require("http");
 const { URL } = require("url");
 
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 const SQL_PAYLOADS = [
   "' OR '1'='1",
-  "'; DROP TABLE users; --",
   "' UNION SELECT null, username, password FROM users --",
-  "1' AND SLEEP(3) --",
-  "admin'--"
+  "admin'--",
+  "' OR '1'='1' --",
+  "'"
 ];
 
 const SQL_ERROR_SIGNATURES = [
@@ -69,6 +71,7 @@ async function testSQLInjection(target, siteMap) {
         const testURL = parsed.toString();
         const res     = await fetchURL(testURL);
         if (!res) continue;
+        await delay(100);
 
         const body = res.body.toLowerCase();
         for (const sig of SQL_ERROR_SIGNATURES) {
