@@ -46,7 +46,7 @@ Go to `File → Preferences → Settings → Security Tester`:
 |---|---|---|
 | `securityTester.maxPages` | 100 | Max pages to crawl |
 | `securityTester.maxDepth` | 4 | Max crawl depth |
-| `securityTester.timeout` | 10 | Request timeout (seconds) |
+| `securityTester.timeout` | 20 | Request timeout (seconds) |
 
 ---
 

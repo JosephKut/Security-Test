@@ -3,7 +3,12 @@
   "displayName": "Security Tester",
   "description": "Scan any website for 24 security vulnerabilities — SQL injection, XSS, CSRF, JWT attacks, exposed files, and more. Pinpoints exact locations and provides fix code.",
   "version": "1.0.0",
-  "publisher": "G4Dev",
+  "publisher": "JKDevOp",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JosephKut/Security-Test/tree/main/vscode%20extension"
+  },
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.85.0"
@@ -53,7 +58,7 @@
         },
         "securityTester.timeout": {
           "type": "number",
-          "default": 10,
+          "default": 20,
           "description": "Request timeout in seconds"
         }
       }
