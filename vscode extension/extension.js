@@ -15,8 +15,30 @@ let lastResults  = null;
 let lastSiteMap  = null;
 let lastTarget   = null;
 
+class SecurityTesterTreeProvider {
+  getTreeItem(element) { return element; }
+
+  getChildren(element) {
+    if (element) return [];
+    const items = [
+      new vscode.TreeItem("🔍 Run Full Scan", vscode.TreeItemCollapsibleState.None),
+      new vscode.TreeItem("⚡ Run Quick Scan", vscode.TreeItemCollapsibleState.None),
+      new vscode.TreeItem("📄 Open Last Report", vscode.TreeItemCollapsibleState.None),
+    ];
+    items[0].command = { command: "securityTester.run", title: "" };
+    items[1].command = { command: "securityTester.runNoCrawl", title: "" };
+    items[2].command = { command: "securityTester.openReport", title: "" };
+    items[0].tooltip = "Crawl site and run all 24 tests";
+    items[1].tooltip = "Test root URL only — skip crawling";
+    items[2].tooltip = "Re-open the last scan report";
+    return items;
+  }
+}
+
 function activate(context) {
   outputChannel = vscode.window.createOutputChannel("Security Tester");
+
+  vscode.window.registerTreeDataProvider("securityTester.mainView", new SecurityTesterTreeProvider());
 
   // ── Command 1: Full scan with crawler ──────────────────────
   const fullScanCmd = vscode.commands.registerCommand(

@@ -18,6 +18,24 @@
   "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "securityTester",
+          "title": "Security Tester",
+          "icon": "images/activity-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "securityTester": [
+        {
+          "type": "tree",
+          "id": "securityTester.mainView",
+          "name": "Scanner"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "securityTester.run",
